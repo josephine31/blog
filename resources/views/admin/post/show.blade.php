@@ -33,8 +33,10 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Post</h3>
-          <a class='col-lg-offset-5 btn btn-success' href="{{ route ('post.create') }}">Add New </a>
-
+          @can('posts.create',Auth::user())
+             <a class='col-lg-offset-5 btn btn-success' href="{{ route ('post.create') }}">Add New </a>
+          @endcan
+         
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
@@ -59,8 +61,12 @@
                   <th>Subtitle</th>
                   <th>Slug</th>
                   <th>Created At</th>
+                  @can('posts.update',Auth::user())
                   <th>Edit</th>
+                  @endcan
+                  @can('posts.delete',Auth::user())
                   <th>Delete</th>
+                  @endcan
                 </tr>
                 </thead>
                 <tbody>
@@ -72,8 +78,12 @@
                        <td>{{ $post->subtitle }}</td>
                        <td>{{ $post->slug }}</td>
                        <td>{{ $post->created_at }}</td>
+                       @can('posts.update',Auth::user())
                        <td><a href="{{ route('post.edit',$post->id) }}" class="fa fa-edit" style="color:green"></a></td>
+                       @endcan
+                       @can('posts.delete',Auth::user())
                        <td><a href="{{ route('post.delete',$post->id) }}" class="fa fa-trash" style="color:red"></a></td>
+                       @endcan
                       </tr>    
                     @endforeach
                 </tbody>
@@ -84,8 +94,12 @@
                     <th>Subtitle</th>
                     <th>Slug</th>
                     <th>Created At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    @can('posts.update',Auth::user())
+                     <th>Edit</th>
+                    @endcan
+                    @can('posts.delete',Auth::user())
+                     <th>Delete</th>
+                    @endcan
                   </tr>
                 </tfoot>
               </table>

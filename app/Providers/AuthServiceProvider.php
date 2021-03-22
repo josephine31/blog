@@ -23,11 +23,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->registerPolicies();
+        $this->registerPolicies();
 
-        // Gate::resource('posts ', function ($user, $post) {
-        //     return $user->id == $post->user_id;
-        // });
+         Gate::resource('posts ', 'App\Policies\PostPolicy');
+         Gate::define('posts.tag', 'App\Policies\PostPolicy@tag');
+         Gate::define('posts.category', 'App\Policies\PostPolicy@category');
     
-    }
+    }                   
 }

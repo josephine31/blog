@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\user\post;
+use Auth;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -37,7 +38,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.post');
+        if (Auth::user()->can('posts.create')) {
+            return view('admin.post.post');
+        }
+        return redirect(route('admin.home'));
+        
     }
 
     /**
@@ -97,8 +102,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post= post::where('id',$id)->first();
-        return view('admin.post.edit',compact('post'));
+        if (Auth::user()->can('posts.update')){
+            $post= post::where('id',$id)->first();
+            return view('admin.post.edit',compact('post'));
+        }
+        return redirect(route('admin.home'));
+       
     }
 
     /**

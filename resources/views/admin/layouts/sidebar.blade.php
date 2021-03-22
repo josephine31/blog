@@ -43,18 +43,23 @@
                   <p>Post</p>
                 </a>
               </li>
+              @can('posts.category',Auth::user())
               <li class="nav-item">
                 <a href="{{ route ('category.index') }}" class="nav-link  {{ \Request::is('admin/category')?'active':'' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Categories</p>
                 </a>
-              </li>
+              </li>             
+              @endcan
+              
+              @can('posts.tag',Auth::user())
               <li class="nav-item">
                 <a href="{{ route ('tag.index') }}" class="nav-link  {{ \Request::is('admin/tag')?'active':'' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tags</p>
                 </a>
               </li>
+              @endcan
               <li class="nav-item">
                 <a href="{{ route ('user.index') }}" class="nav-link  {{ \Request::is('admin/user')?'active':'' }}">
                   <i class="far fa-circle nav-icon"></i>
